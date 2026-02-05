@@ -28,6 +28,9 @@ export default async function handler(req, res) {
 
     } catch (error) {
         console.error(error.response?.data || error.message);
-        res.status(500).json({ error: 'Failed to fetch Klaviyo count' });
+        res.status(500).json({ 
+            error: 'Failed to fetch Klaviyo count',
+            details: error.response?.data || error.message 
+        });
     }
 }
