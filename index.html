@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>订阅人数展示</title>
+    <style>
+        .counter-box {
+            font-family: sans-serif;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: center;
+        }
+        #count {
+            font-size: 2em;
+            color: #1274ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="counter-box">
+    <h3>加入我们的社区</h3>
+    <div id="count">加载中...</div>
+    <p>名订阅者已加入</p>
+</div>
+
+<script>
+    async function getSubscriberCount() {
+        try {
+            // 指向你的 Node.js 后端地址
+            const response = await fetch('https://klaviyo-counter.vercel.app/api/subscriber-count');
+            const data = await response.json();
+            
+            if (data.count) {
+                // 使用内置方法格式化数字（如 1234 变为 1,234）
+                document.getElementById('count').innerText = data.count.toLocaleString();
+            }
+        } catch (error) {
+            document.getElementById('count').innerText = '暂无数据';
+        }
+    }
+
+    getSubscriberCount();
+</script>
+
+</body>
+</html>
