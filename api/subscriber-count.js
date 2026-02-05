@@ -13,6 +13,13 @@ export default async function handler(req, res) {
     const KLAVIYO_API_KEY = process.env.KLAVIYO_API_KEY;
     const LIST_ID = process.env.KLAVIYO_LIST_ID;
 
+    if (!KLAVIYO_API_KEY) {
+        return res.status(500).json({ error: 'Configuration Error', details: 'KLAVIYO_API_KEY is missing from environment variables' });
+    }
+    if (!LIST_ID) {
+        return res.status(500).json({ error: 'Configuration Error', details: 'KLAVIYO_LIST_ID is missing from environment variables' });
+    }
+
     try {
         const response = await axios.get(`https://a.klaviyo.com/api/lists/${LIST_ID}/`, {
             params: { 'additional-fields[list]': 'profile_count' },
