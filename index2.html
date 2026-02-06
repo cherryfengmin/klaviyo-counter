@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订阅增长报告</title>
+    <style>
+        :root { --primary: #0057ff; --bg: #f4f7ff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,87,255,0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        .label { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .number { font-size: 3rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
+        .period { font-size: 0.8rem; color: #999; background: #eee; padding: 4px 10px; border-radius: 20px; display: inline-block; }
+        
+        /* 加载动画 */
+        .loading { opacity: 0.5; pointer-events: none; }
+    </style>
+</head>
+<body>
+<a href="/index2.html">Metric ID</a> <a href="/index.html">List ID</a>
+<div class="stat-card" id="card">
+    <div class="label">指定区间新增订阅</div>
+    <div class="number" id="count">...</div>
+    <div class="period" id="period">正在获取日期...</div>
+</div>
+
+<script>
+    async function loadGrowthData() {
+        const countEl = document.getElementById('count');
+        const periodEl = document.getElementById('period');
+
+        try {
+            // 替换为你部署后的 Vercel URL
+            const response = await fetch('/api/fixed-growth');
+            const data = await response.json();
+
+            if (data.count !== undefined) {
+                // 数字滚动效果
+                animateNumber(countEl, data.count);
+                periodEl.innerText = data.period;
+            } else {
+                throw new Error();
+            }
+        } catch (err) {
+            countEl.innerText = "Error";
+            periodEl.innerText = "请检查 API 配置";
+        }
+    }
+
+    // 简单的数字滚动动画
+    function animateNumber(obj, endValue) {
+        let startValue = 0;
+        let duration = 1500;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * endValue).toLocaleString();
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    window.onload = loadGrowthData;
+</script>
+
+</body>
+</html>
