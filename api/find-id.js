@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 // 在这里填入你的私钥
-const PRIVATE_KEY = 'pk_xxxxxxxxxxxxxxxxxxxxxxxx'; 
+const PRIVATE_KEY = 'pk_3ca00c3f03855f9e20153313fd631aed6c'; 
 
 async function getAllMetrics() {
     try {

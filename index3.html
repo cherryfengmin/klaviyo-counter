@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Klaviyo 订阅增长展示</title>
+    <style>
+        body { font-family: sans-serif;  height: 100vh; background: #f4f7f6; }
+        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        .number { font-size: 3rem; font-weight: bold; color: #15c15d; margin: 10px 0; }
+        .label { color: #666; font-size: 1rem; }
+        .loading { color: #999; font-style: italic; }
+    </style>
+</head>
+<body>
+<h2>请将 YOUR_METRIC_ID 替换为你在 Klaviyo Analytics > Metrics 中获取的实际 Metric ID,关联后端get-growth.js</h2>
+   <div>
+<div class="card">
+        <div class="label">本月新增订阅人数</div>
+        <div id="growth-number" class="number">--</div>
+        <div id="status" class="loading">正在同步数据...</div>
+    </div>
+</div> 
+    <script>
+        async function fetchGrowth() {
+            try {
+                // 替换为你部署后的后端接口地址
+                const response = await fetch('/api/get-growth'); 
+                const data = await response.json();
+                
+                if (data.growth !== undefined) {
+                    document.getElementById('growth-number').innerText = data.growth;
+                    document.getElementById('status').innerText = "数据已实时更新";
+                } else {
+                    throw new Error();
+                }
+            } catch (err) {
+                document.getElementById('status').innerText = "获取失败，请稍后再试";
+                document.getElementById('growth-number').innerText = "!";
+            }
+        }
+
+        // 页面加载后执行
+        fetchGrowth();
+    </script>
+</body>
+</html>

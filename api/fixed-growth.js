@@ -5,9 +5,9 @@ export default async function handler(req, res) {
     res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
 
     // --- 预设配置区 ---
-    const START_DATE = '2024-01-01'; // 起始日期
-    const END_DATE = '2024-01-31';   // 结束日期
-    const METRIC_ID = 'XXXXXX';      // 填入你的 "Subscribed to List" Metric ID
+    const START_DATE = '2026-02-14'; // 起始日期
+    const END_DATE = '2024-02-25';   // 结束日期
+    const METRIC_ID = 'RqHSHe';      // 填入你的 "Subscribed to List" Metric ID
     // ----------------
 
     try {
