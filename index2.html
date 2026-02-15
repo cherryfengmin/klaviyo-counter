@@ -48,7 +48,7 @@
             // 替换为你部署后的 Vercel URL
             const response = await fetch('https://klaviyo-counter.vercel.app/api/fixed-growth');
             const data = await response.json();
-
+            console.log(data);
             if (data.count !== undefined) {
                 // 数字滚动效果
                 animateNumber(countEl, data.count);

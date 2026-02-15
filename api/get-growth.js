@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       accept: 'application/json',
       revision: '2024-02-15',
       'content-type': 'application/json',
-      Authorization: KLAVIYO_API_KEY
+      'Authorization': `Klaviyo-API-Key ${KLAVIYO_API_KEY}`
     },
     body: JSON.stringify({
       data: {

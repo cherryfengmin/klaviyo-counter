@@ -31,7 +31,7 @@
                 // 替换为你部署后的后端接口地址
                 const response = await fetch('https://klaviyo-counter.vercel.app/api/get-growth'); 
                 const data = await response.json();
-                
+                console.log(data);
                 if (data.growth !== undefined) {
                     document.getElementById('growth-number').innerText = data.growth;
                     document.getElementById('status').innerText = "数据已实时更新";
