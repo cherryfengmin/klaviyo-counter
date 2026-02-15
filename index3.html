@@ -13,7 +13,12 @@
 </head>
 <body>
 <h2>请将 YOUR_METRIC_ID 替换为你在 Klaviyo Analytics > Metrics 中获取的实际 Metric ID,关联后端get-growth.js</h2>
-   <div>
+   <ul>
+    <li><a href="/index.html">List ID</a></li>
+    <li><a href="/index2.html">Metric ID demo 1</a></li>
+    <li><a href="/index3.html">Metric ID demo 2</a></li>
+  </ul> 
+<div>
 <div class="card">
         <div class="label">本月新增订阅人数</div>
         <div id="growth-number" class="number">--</div>
@@ -24,7 +29,7 @@
         async function fetchGrowth() {
             try {
                 // 替换为你部署后的后端接口地址
-                const response = await fetch('/api/get-growth'); 
+                const response = await fetch('https://klaviyo-counter.vercel.app/api/get-growth'); 
                 const data = await response.json();
                 
                 if (data.growth !== undefined) {
