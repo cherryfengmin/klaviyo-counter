@@ -22,8 +22,7 @@
 <body>
  <ul>
     <li><a href="/index.html">List ID</a></li>
-    <li><a href="/index2.html">Metric ID demo 1</a></li>
-    <li><a href="/index3.html">Metric ID demo 2</a></li>
+    <li><a href="/index3.html">Metric ID demo </a></li>
   </ul>
 <div class="counter-box">
     <h3>加入我们的社区</h3>
@@ -36,7 +35,7 @@
     async function getSubscriberCount() {
         try {
             // 指向你的 Node.js 后端地址
-            const response = await fetch('https://klaviyo-counter.vercel.app/api/subscriber-count');
+            const response = await fetch('/api/subscriber-count');
             const data = await response.json();
             console.log(data);
             if (data.count) {

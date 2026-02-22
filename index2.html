@@ -27,6 +27,7 @@
 </head>
 <body>
   <h2>关联后端文件 fixed-growth.js</h2> 
+  (失效)
   <ul>
     <li><a href="/index.html">List ID</a></li>
     <li><a href="/index2.html">Metric ID demo 1</a></li>
@@ -46,7 +47,7 @@
 
         try {
             // 替换为你部署后的 Vercel URL
-            const response = await fetch('https://klaviyo-counter.vercel.app/api/fixed-growth');
+            const response = await fetch('/api/fixed-growth');
             const data = await response.json();
             console.log(data);
             if (data.count !== undefined) {
